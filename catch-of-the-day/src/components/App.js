@@ -14,7 +14,7 @@ class App extends React.Component {
   };
 
   static propTypes = {
-    match: PropTypes.object
+    match: PropTypes.object.isRequired
   };
 
   componentDidMount() {
@@ -32,7 +32,6 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state.order);
     localStorage.setItem(
       this.props.match.params.storeId,
       JSON.stringify(this.state.order)
@@ -86,7 +85,7 @@ class App extends React.Component {
   removeFromOrder = key => {
     // 1. take a copy of state
     const order = { ...this.state.order };
-    // 2. remove that itemf from order
+    // 2. remove that item from order
     delete order[key];
     // 3. Call setState to update our state object
     this.setState({ order });
@@ -119,6 +118,7 @@ class App extends React.Component {
           deleteFish={this.deleteFish}
           loadSampleFishes={this.loadSampleFishes}
           fishes={this.state.fishes}
+          storeId={this.props.match.params.storeId}
         />
       </div>
     );
